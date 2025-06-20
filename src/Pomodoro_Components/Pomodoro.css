@@ -1,0 +1,38 @@
+/* src/styles/pomodoro.css */
+.pomodoro-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  font-family: 'Press Start 2P', cursive, monospace;
+  background: linear-gradient(135deg, #feffff 0%,#f5eca4 25%, hsl(48, 94%, 66%) 50%, #ffe8e8 75%,#fbec65 100% ),
+}
+.pomodoro-title {
+
+  font-size: 2rem;
+  font-weight: bold;
+  color: #333;
+}
+.pomodoro-timer {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #ff5722;
+}   
+.pomodoro-controls {
+  display: flex;
+  gap: 10px;
+}
+.pomodoro-button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #fff;
+  background-color: #ff5722;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.pomodoro-button:hover {
+  background-color: #e64a19;
+}

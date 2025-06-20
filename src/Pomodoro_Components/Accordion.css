@@ -1,0 +1,116 @@
+.accordion-container {
+  background-color: #ffffff; /* White background for the card */
+   border-radius: 12px;
+  box-shadow: 6px 6px 0px #1a1a1a;
+  border: 2px solid black;
+border-bottom: 3px solid black;
+border-right: 3px solid black;
+  margin: 2rem auto;
+  overflow: hidden; /* Important to hide overflow when content collapses */
+  border: 1px solid #e0e0e0; /* Light border */
+  width: 40rem;
+  display: grid;
+ 
+}
+
+.accordion-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  cursor: pointer;
+  background-color: #f8f8f8; /* Slightly different background for header */
+  border-bottom: 1px solid #eee; /* Separator for header */
+}
+
+.accordion-header:hover {
+  background-color: #f0f0f0; /* Slight hover effect */
+}
+
+.accordion-title-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.accordion-icon {
+  color: #ff8c00; /* Orange color for the 'i' icon */
+  font-weight: bold;
+  font-size: 1.2rem;
+  margin-right: 10px;
+}
+
+.accordion-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 0;
+  color: #000000;
+}
+
+.accordion-arrow {
+  transition: transform 0.3s ease; /* Smooth rotation for the arrow */
+}
+
+.accordion-arrow.open {
+  transform: rotate(180deg); /* Rotate the arrow when open */
+}
+
+.accordion-content {
+  padding: 20px;
+  line-height: 1.6;
+  color: #303030;
+  font-size: 1.2rem; /* Smaller font size for content */
+  /* You can add max-height and transition for a smoother collapse animation if needed */
+  /* For simplicity, we're just rendering/unrendering for now */
+}
+
+.accordion-content p {
+  margin-bottom: 10px;
+}
+
+.accordion-content h3 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+    color: #000000;
+}
+
+.accordion-content ol,
+.accordion-content ul {
+    margin-left: 20px;
+    padding-left: 0;
+}
+
+.accordion-content li {
+    margin-bottom: 5px;
+}
+
+.content-section {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+}
+
+.content-section-header {
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: #ff8c00; /* Orange color for the section number */
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.content-section-header span {
+    display: inline-block;
+    background-color: #ff8c00;
+    color: white;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 8px;
+    font-size: 1.2rem;
+}
