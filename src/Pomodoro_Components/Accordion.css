@@ -1,17 +1,17 @@
 .accordion-container {
-  background-color: #ffffff; /* White background for the card */
-   border-radius: 12px;
+  background-color: #ffffff;
+  border-radius: 12px;
   box-shadow: 6px 6px 0px #1a1a1a;
   border: 2px solid black;
-border-bottom: 3px solid black;
-border-right: 3px solid black;
-  margin: 2rem auto;
-  overflow: hidden; /* Important to hide overflow when content collapses */
-  border: 1px solid #e0e0e0; /* Light border */
+  border-bottom: 3px solid black;
+  border-right: 3px solid black;
+  margin: 0 auto; /* 🔧 Removed top margin */
+  overflow: hidden;
+  border: 1px solid #e0e0e0;
   width: 40rem;
   display: grid;
- 
 }
+
 
 .accordion-header {
   display: flex;

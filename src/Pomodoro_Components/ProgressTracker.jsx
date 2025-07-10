@@ -1,98 +1,149 @@
-import React, { useContext } from 'react';
-import styled from 'styled-components';
-import { StateContext } from './StateProvider';
+import styled from "styled-components";
+import { useContext } from "react";
+import { StateContext } from "../Pomodoro_Components/StateProvider.jsx";
 
 const ProgressTracker = () => {
-  const { completedSessions, cycle } = useContext(StateContext);
+    const { completedSessions, cycle } = useContext(StateContext);
 
-  return (
-    <Container>
-      <Header>
-        <Title>
-          🕒 <span>Today's Progress</span>
-        </Title>
-        <CompletedBox>{completedSessions} completed</CompletedBox>
-      </Header>
+    const sessionBoxes = Array.from({ length: 4 }, (_, i) => (
+        <SessionBox key={i} completed={i < completedSessions % 4} />
+    ));
 
-      <BoxContainer>
-        {Array.from({ length: 4 }, (_, i) => (
-          <SessionBox key={i} completed={i < completedSessions % 4} />
-        ))}
-      </BoxContainer>
-
-      <CycleBox>Cycle: {cycle}</CycleBox>
-    </Container>
-  );
+    return (
+        <ProgressContainer>
+            <Header>
+                <h3>🕒 Today's Progress</h3>
+                <Badge>{completedSessions} completed</Badge>
+            </Header>
+            <BoxContainer>{sessionBoxes}</BoxContainer>
+            <CycleTag>Cycle: {cycle}</CycleTag>
+        </ProgressContainer>
+    );
 };
 
 export default ProgressTracker;
 
-const Container = styled.div`
-  background-color: #fff;
-  padding: 1rem;
-  border-radius: 12px;
-  box-shadow: 6px 6px 0px #1a1a1a;
-  width: 40rem;
-margin: 2rem auto;
-border: 2px solid black;
-border-bottom: 3px solid black;
-border-right: 3px solid black;
-display: grid;
+// Styled Components
+const ProgressContainer = styled.div`
+    border: 2px solid #000;
+    border-radius: 12px;
+    padding: 1rem;
+    background: white;
+    width: 40rem;
+    max-width: 100%;
+    margin: 0 auto;
+    display: block;
+    margin-bottom: 30px;
+    @media (max-width: 1440px) {
+        width: 45rem;
+    }
 
-
-/* place-items: center; */
+     @media (max-width: 1284px) {
+        width: 35rem;
+    }
+    
+    @media (max-width: 1024px) {
+        width: 25rem;
+    }
+    
+    @media (max-width: 768px) {
+        width: 22rem;
+        padding: 0.75rem;
+    }
+    
+    @media (max-width: 600px) {
+        width: 85vw;
+        max-width: 20rem;
+    }
+    
+    @media (max-width: 480px) {
+        width: 90vw;
+        max-width: 18rem;
+        padding: 0.5rem;
+        border-width: 1px;
+    }
+    
+    @media (max-width: 360px) {
+        width: 95vw;
+        max-width: 16rem;
+    }
 `;
 
 const Header = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    
+    h3 {
+        margin: 0;
+        font-size: 1rem;
+    }
+    
+    @media (max-width: 480px) {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.25rem;
+        
+        h3 {
+            font-size: 0.9rem;
+        }
+    }
 `;
 
-const Title = styled.h2`
-  font-family: 'Arial', sans-serif;
-  font-weight: bold;
-  font-size: 1.2rem;
-  display: flex;
-  
-
-  span {
-    margin-left: 0.5rem;
-  }
-`;
-
-const CompletedBox = styled.div`
-  border: 2px solid #000;
-  border-radius: 6px;
-  padding: 0.2rem 0.6rem;
-  font-size: 0.9rem;
-;
+const Badge = styled.div`
+    border: 2px solid #000;
+    padding: 0.25rem 0.5rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    
+    @media (max-width: 480px) {
+        font-size: 0.8rem;
+        padding: 0.2rem 0.4rem;
+        border-width: 1px;
+    }
 `;
 
 const BoxContainer = styled.div`
-  display: flex;
-  gap: 10px;
-  margin-bottom: 1rem;
+    display: flex;
+    gap: 0.5rem;
+    margin: 1rem 0;
+    justify-content: center;
+    flex-wrap: wrap;
+    
+    @media (max-width: 480px) {
+        gap: 0.25rem;
+        margin: 0.5rem 0;
+    }
 `;
 
 const SessionBox = styled.div`
-  width: 7rem;
-  height: 40px;
-  border: 2px solid #000;
-  border-radius: 6px;
-  background-color: ${({ completed }) => (completed ? 'orange' : 'white')};
-  transition: background-color 0.3s ease;
+    width: 60px;
+    height: 40px;
+    border: 2px solid #000;
+    border-radius: 6px;
+    background-color: ${({ completed }) => (completed ? "orange" : "white")};
+    flex-shrink: 0;
+    
+    @media (max-width: 480px) {
+        width: 45px;
+        height: 30px;
+        border-width: 1px;
+    }
 `;
 
-const CycleBox = styled.div`
-  border: 2px solid #000;
-  border-radius: 6px;
-  padding: 0.3rem 0.8rem;
-  font-size: 0.9rem;
-  font-weight: 600;
-  background-color: #f5f5f5;
-  display: inline-block;
-  width: 6rem;
-  
+const CycleTag = styled.div`
+    font-size: 0.85rem;
+    border: 2px solid #aaa;
+    padding: 0.25rem 0.5rem;
+    border-radius: 6px;
+    width: fit-content;
+    
+    @media (max-width: 480px) {
+        font-size: 0.75rem;
+        padding: 0.2rem 0.4rem;
+        border-width: 1px;
+    }
 `;

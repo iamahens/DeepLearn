@@ -1,38 +1,111 @@
-/* src/styles/pomodoro.css */
 .pomodoro-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
-  font-family: 'Press Start 2P', cursive, monospace;
-  background: linear-gradient(135deg, #feffff 0%,#f5eca4 25%, hsl(48, 94%, 66%) 50%, #ffe8e8 75%,#fbec65 100% ),
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    font-family: 'Press Start 2P', cursive, monospace;
+    background: linear-gradient(135deg, #feffff 0%, #f5eca4 25%, hsl(48, 94%, 66%) 50%, #ffe8e8 75%, #fbec65 100%);
+    padding: 1rem;
+    min-height: 100vh;
+    box-sizing: border-box;
 }
-.pomodoro-title {
 
-  font-size: 2rem;
-  font-weight: bold;
-  color: #333;
+.pomodoro-title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+    margin-bottom: 1rem;
 }
+
+@media (max-width: 768px) {
+    .pomodoro-title {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .pomodoro-title {
+        font-size: 1.2rem;
+    }
+}
+
 .pomodoro-timer {
-  font-size: 3rem;
-  font-weight: bold;
-  color: #ff5722;
-}   
+    font-size: 3rem;
+    font-weight: bold;
+    color: #ff5722;
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .pomodoro-timer {
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .pomodoro-timer {
+        font-size: 2rem;
+    }
+}
+
 .pomodoro-controls {
-  display: flex;
-  gap: 10px;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
 }
+
+@media (max-width: 480px) {
+    .pomodoro-controls {
+        gap: 8px;
+        width: 100%;
+    }
+}
+
 .pomodoro-button {
-  padding: 10px 20px;
-  font-size: 1rem;
-  font-weight: bold;
-  color: #fff;
-  background-color: #ff5722;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #fff;
+    background-color: #ff5722;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    white-space: nowrap;
+    min-width: 80px;
 }
+
 .pomodoro-button:hover {
-  background-color: #e64a19;
+    background-color: #e64a19;
+}
+
+@media (max-width: 768px) {
+    .pomodoro-button {
+        font-size: 0.9rem;
+        padding: 8px 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .pomodoro-button {
+        font-size: 0.8rem;
+        padding: 6px 12px;
+        flex: 1;
+        min-width: 60px;
+    }
+}
+
+/* Additional responsive utilities */
+@media (max-width: 360px) {
+    .pomodoro-container {
+        gap: 15px;
+        padding: 0.5rem;
+    }
+    
+    .pomodoro-button {
+        font-size: 0.7rem;
+        padding: 5px 10px;
+    }
 }
