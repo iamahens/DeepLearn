@@ -1,0 +1,389 @@
+/* Pixelated Dashboard Theme */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+/* Root variables for pixelated theme */
+:root {
+  --pixel-bg-primary: #0a0a0a;
+  --pixel-bg-secondary: #1a1a1a;
+  --pixel-accent: #00ff00;
+  --pixel-accent-secondary: #ff00ff;
+  --pixel-warning: #ffff00;
+  --pixel-danger: #ff0000;
+  --pixel-info: #00ffff;
+  --pixel-text: #ffffff;
+  --pixel-text-dim: #888888;
+  --pixel-border: #333333;
+}
+
+.pixel-dashboard {
+  font-family: 'Press Start 2P', monospace;
+  background: var(--pixel-bg-primary);
+  color: var(--pixel-text);
+  min-height: 100vh;
+  padding: 20px;
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
+/* Pixelated containers */
+.pixel-container {
+  background: var(--pixel-bg-secondary);
+  border: 2px solid var(--pixel-border);
+  border-radius: 0;
+  padding: 16px;
+  margin: 10px;
+  position: relative;
+  box-shadow: 
+    inset 2px 2px 0 rgba(255,255,255,0.1),
+    inset -2px -2px 0 rgba(0,0,0,0.5);
+}
+
+/* Header styling */
+.pixel-header {
+  border-bottom: 2px solid var(--pixel-accent);
+  padding-bottom: 16px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.pixel-title {
+  font-size: 24px;
+  color: var(--pixel-accent);
+  text-shadow: 2px 2px 0 rgba(0,0,0,0.8);
+  animation: pixelGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes pixelGlow {
+  from { text-shadow: 2px 2px 0 rgba(0,0,0,0.8); }
+  to { text-shadow: 2px 2px 0 rgba(0,0,0,0.8), 0 0 10px var(--pixel-accent); }
+}
+
+.pixel-subtitle {
+  font-size: 12px;
+  color: var(--pixel-text-dim);
+  margin-top: 8px;
+}
+
+/* Grid layout */
+.pixel-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.pixel-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.pixel-grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+  margin-top: 20px;
+}
+
+@media (max-width: 1200px) {
+  .pixel-grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .pixel-grid-3,
+  .pixel-grid-4 {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Metric cards */
+.pixel-metric-card {
+  background: linear-gradient(135deg, var(--pixel-bg-secondary) 0%, #2a2a2a 100%);
+  border: 2px solid var(--pixel-accent);
+  padding: 20px;
+  text-align: center;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.pixel-metric-card:hover {
+  border-color: var(--pixel-accent-secondary);
+  box-shadow: 0 0 20px rgba(255, 0, 255, 0.3);
+  transform: translateY(-2px);
+}
+
+.pixel-metric-value {
+  font-size: 32px;
+  color: var(--pixel-accent);
+  display: block;
+  margin-bottom: 8px;
+  text-shadow: 1px 1px 0 rgba(0,0,0,0.8);
+}
+
+.pixel-metric-label {
+  font-size: 10px;
+  color: var(--pixel-text-dim);
+  text-transform: uppercase;
+}
+
+.pixel-metric-change {
+  font-size: 8px;
+  margin-top: 8px;
+  padding: 4px 8px;
+  border: 1px solid;
+  display: inline-block;
+}
+
+.pixel-metric-change.positive {
+  color: var(--pixel-accent);
+  border-color: var(--pixel-accent);
+  background: rgba(0, 255, 0, 0.1);
+}
+
+.pixel-metric-change.negative {
+  color: var(--pixel-danger);
+  border-color: var(--pixel-danger);
+  background: rgba(255, 0, 0, 0.1);
+}
+
+/* Chart containers */
+.pixel-chart-container {
+  background: var(--pixel-bg-secondary);
+  border: 2px solid var(--pixel-border);
+  padding: 20px;
+  margin: 10px 0;
+}
+
+.pixel-chart-title {
+  font-size: 14px;
+  color: var(--pixel-accent);
+  margin-bottom: 16px;
+  text-align: center;
+  border-bottom: 1px solid var(--pixel-border);
+  padding-bottom: 8px;
+}
+
+/* Terminal-like logs */
+.pixel-terminal {
+  background: #000000;
+  border: 2px solid var(--pixel-accent);
+  padding: 16px;
+  font-family: 'Courier New', monospace;
+  height: 200px;
+  overflow-y: auto;
+  position: relative;
+}
+
+.pixel-terminal::before {
+  content: "DEEPTERM ANALYTICS v2.1.0";
+  position: absolute;
+  top: -2px;
+  left: 10px;
+  background: var(--pixel-bg-primary);
+  color: var(--pixel-accent);
+  padding: 0 8px;
+  font-size: 8px;
+}
+
+.pixel-terminal-line {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 10px;
+}
+
+.pixel-terminal-line.success {
+  color: var(--pixel-accent);
+}
+
+.pixel-terminal-line.warning {
+  color: var(--pixel-warning);
+}
+
+.pixel-terminal-line.error {
+  color: var(--pixel-danger);
+}
+
+.pixel-terminal-line.info {
+  color: var(--pixel-info);
+}
+
+/* Animated cursor */
+.pixel-cursor {
+  display: inline-block;
+  background: var(--pixel-accent);
+  width: 8px;
+  height: 12px;
+  animation: pixelBlink 1s step-end infinite;
+}
+
+@keyframes pixelBlink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+/* Status indicators */
+.pixel-status {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  margin-right: 8px;
+  border: 1px solid;
+  position: relative;
+}
+
+.pixel-status.online {
+  background: var(--pixel-accent);
+  border-color: var(--pixel-accent);
+  box-shadow: 0 0 8px var(--pixel-accent);
+}
+
+.pixel-status.offline {
+  background: var(--pixel-danger);
+  border-color: var(--pixel-danger);
+}
+
+.pixel-status.warning {
+  background: var(--pixel-warning);
+  border-color: var(--pixel-warning);
+}
+
+/* Progress bars */
+.pixel-progress {
+  width: 100%;
+  height: 20px;
+  background: var(--pixel-bg-primary);
+  border: 2px solid var(--pixel-border);
+  position: relative;
+  overflow: hidden;
+}
+
+.pixel-progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, 
+    var(--pixel-accent) 0%, 
+    var(--pixel-accent-secondary) 50%, 
+    var(--pixel-accent) 100%);
+  transition: width 0.5s ease;
+  position: relative;
+}
+
+.pixel-progress-bar::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -20px;
+  width: 20px;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  animation: pixelScan 2s linear infinite;
+}
+
+@keyframes pixelScan {
+  0% { left: -20px; }
+  100% { left: 100%; }
+}
+
+/* Buttons */
+.pixel-button {
+  background: var(--pixel-bg-secondary);
+  border: 2px solid var(--pixel-accent);
+  color: var(--pixel-accent);
+  padding: 8px 16px;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-transform: uppercase;
+}
+
+.pixel-button:hover {
+  background: var(--pixel-accent);
+  color: var(--pixel-bg-primary);
+  box-shadow: 0 0 10px var(--pixel-accent);
+}
+
+.pixel-button:active {
+  transform: translateY(2px);
+}
+
+/* Tables */
+.pixel-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 2px;
+  font-size: 10px;
+}
+
+.pixel-table th {
+  background: var(--pixel-accent);
+  color: var(--pixel-bg-primary);
+  padding: 8px;
+  text-align: left;
+  border: 1px solid var(--pixel-accent);
+}
+
+.pixel-table td {
+  background: var(--pixel-bg-secondary);
+  color: var(--pixel-text);
+  padding: 8px;
+  border: 1px solid var(--pixel-border);
+}
+
+.pixel-table tr:hover td {
+  background: rgba(0, 255, 0, 0.1);
+  border-color: var(--pixel-accent);
+}
+
+/* Animations */
+@keyframes pixelSlideIn {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.pixel-slide-in {
+  animation: pixelSlideIn 0.5s ease-out;
+}
+
+/* Scrollbar styling */
+.pixel-dashboard ::-webkit-scrollbar {
+  width: 12px;
+}
+
+.pixel-dashboard ::-webkit-scrollbar-track {
+  background: var(--pixel-bg-primary);
+  border: 1px solid var(--pixel-border);
+}
+
+.pixel-dashboard ::-webkit-scrollbar-thumb {
+  background: var(--pixel-accent);
+  border: 1px solid var(--pixel-border);
+}
+
+.pixel-dashboard ::-webkit-scrollbar-thumb:hover {
+  background: var(--pixel-accent-secondary);
+}
+
+/* Loading animation */
+.pixel-loading {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--pixel-border);
+  border-top: 2px solid var(--pixel-accent);
+  animation: pixelSpin 1s linear infinite;
+}
+
+@keyframes pixelSpin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
