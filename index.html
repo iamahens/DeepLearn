@@ -1,17 +1,164 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React</title>
-  </head>
-  <link
-  href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
-  rel="stylesheet"
-/>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudyQuest - Your Learning Adventure</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Welcome Modal -->
+    <div id="welcomeModal" class="modal">
+        <div class="modal-content">
+            <h2>🎮 Welcome to StudyQuest!</h2>
+            <p>Enter your name to start your learning adventure:</p>
+            <input type="text" id="nameInput" placeholder="Your name..." maxlength="20">
+            <button id="startButton" onclick="startAdventure()">Start Adventure!</button>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1>🎯 StudyQuest</h1>
+            <div class="user-info">
+                <span id="userName">Player</span>
+                <button id="logoutBtn" onclick="logout()">Logout</button>
+            </div>
+        </header>
+
+        <!-- Welcome Section -->
+        <section class="welcome-section">
+            <div class="welcome-card">
+                <h2 id="welcomeMessage">Welcome back, Player!</h2>
+                <div class="level-info">
+                    <div class="level-badge">
+                        <span>Level <span id="userLevel">1</span></span>
+                    </div>
+                    <div class="xp-container">
+                        <div class="xp-bar">
+                            <div class="xp-fill" id="xpFill"></div>
+                        </div>
+                        <span class="xp-text"><span id="currentXP">0</span> / <span id="nextLevelXP">100</span> XP</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quick Actions -->
+        <section class="quick-actions">
+            <button class="action-btn study-btn" onclick="startStudySession()">
+                📚 Start Study Session
+            </button>
+            <button class="action-btn complete-btn" onclick="completeStudySession()">
+                ✅ Complete Session
+            </button>
+        </section>
+
+        <!-- Study History Calendar -->
+        <section class="study-history">
+            <div class="section-header">
+                <h3>📅 Study History</h3>
+                <div class="calendar-nav">
+                    <button onclick="previousMonth()">&lt;</button>
+                    <span id="currentMonth">January 2024</span>
+                    <button onclick="nextMonth()">&gt;</button>
+                </div>
+            </div>
+            <div class="calendar-container">
+                <div class="calendar-weekdays">
+                    <div>Sun</div>
+                    <div>Mon</div>
+                    <div>Tue</div>
+                    <div>Wed</div>
+                    <div>Thu</div>
+                    <div>Fri</div>
+                    <div>Sat</div>
+                </div>
+                <div class="calendar-grid" id="calendarGrid">
+                    <!-- Calendar days will be generated here -->
+                </div>
+            </div>
+            <div class="calendar-legend">
+                <div class="legend-item">
+                    <div class="legend-color no-study"></div>
+                    <span>No Study</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color light-study"></div>
+                    <span>Light Study</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color medium-study"></div>
+                    <span>Medium Study</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color heavy-study"></div>
+                    <span>Heavy Study</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Achievements Section -->
+        <section class="achievements">
+            <h3>🏆 Achievements</h3>
+            <div class="achievements-grid" id="achievementsGrid">
+                <!-- Achievement cards will be generated here -->
+            </div>
+        </section>
+
+        <!-- Analytics Section -->
+        <section class="analytics">
+            <h3>📊 Analytics</h3>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">⏱️</div>
+                    <div class="stat-info">
+                        <h4>Today's Study Time</h4>
+                        <span id="todayStudyTime">0 min</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🔥</div>
+                    <div class="stat-info">
+                        <h4>Current Streak</h4>
+                        <span id="currentStreak">0 days</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">💪</div>
+                    <div class="stat-info">
+                        <h4>Best Streak</h4>
+                        <span id="bestStreak">0 days</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">📈</div>
+                    <div class="stat-info">
+                        <h4>Total Sessions</h4>
+                        <span id="totalSessions">0</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Study Session Modal -->
+    <div id="studyModal" class="modal">
+        <div class="modal-content">
+            <h3>📚 Study Session in Progress</h3>
+            <div class="timer-display">
+                <span id="timerDisplay">00:00</span>
+            </div>
+            <div class="session-controls">
+                <button onclick="pauseStudySession()">⏸️ Pause</button>
+                <button onclick="stopStudySession()">⏹️ Stop</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
 </html>
