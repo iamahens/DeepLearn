@@ -25,6 +25,40 @@ const Clock = () => {
                 }
                 return updated;
             });
+
+            // === Dashboard Integration ===
+            const now = new Date();
+            const dateKey = now.toISOString().slice(0, 10); // YYYY-MM-DD
+            // Session count for today
+            const sessionKey = `sessions_${dateKey}`;
+            const studyKey = `studytime_${dateKey}`;
+            const totalSessionsKey = 'total_sessions';
+            const streakKey = 'current_streak';
+            const bestStreakKey = 'best_streak';
+            // Increment today's session count
+            let todaySessions = parseInt(localStorage.getItem(sessionKey) || '0', 10) + 1;
+            localStorage.setItem(sessionKey, todaySessions);
+            // Add session minutes to today's study time
+            let sessionMinutes = Math.round(initTime / 60);
+            let todayMinutes = parseInt(localStorage.getItem(studyKey) || '0', 10) + sessionMinutes;
+            localStorage.setItem(studyKey, todayMinutes);
+            // Increment total sessions
+            let totalSessions = parseInt(localStorage.getItem(totalSessionsKey) || '0', 10) + 1;
+            localStorage.setItem(totalSessionsKey, totalSessions);
+            // Update streaks
+            let streak = parseInt(localStorage.getItem(streakKey) || '0', 10);
+            let bestStreak = parseInt(localStorage.getItem(bestStreakKey) || '0', 10);
+            // Check if yesterday had a session
+            const yesterday = new Date(now.getTime() - 86400000);
+            const yKey = `sessions_${yesterday.toISOString().slice(0, 10)}`;
+            if (localStorage.getItem(yKey)) {
+                streak = streak + 1;
+            } else {
+                streak = 1;
+            }
+            if (streak > bestStreak) bestStreak = streak;
+            localStorage.setItem(streakKey, streak);
+            localStorage.setItem(bestStreakKey, bestStreak);
         }
 
         return () => clearInterval(interval);

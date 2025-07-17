@@ -1,6 +1,7 @@
 import styled from 'styled-components';
-import React from 'react'
-import { useState } from 'react';
+import React, { useEffect, useContext } from 'react';
+import { StateContext } from '../Pomodoro_Components/StateProvider.jsx';
+import { useNavigate } from 'react-router-dom';
 import Pomodoro_Tags from '../Pomodoro_Components/Pomodoro_Tags.jsx';
 import Timer from '../Pomodoro_Components/Timer.jsx';
 import Modal from '../Pomodoro_Components/Modal.jsx';
@@ -10,26 +11,35 @@ import StreakDisplay from '../Pomodoro_Components/StreakDisplay.jsx';
 import ProgressTracker from '../Pomodoro_Components/ProgressTracker.jsx';
 import AboutPomodoro from '../Pomodoro_Components/AboutPomodoro.jsx';
 const Pomodora = () => {
+  const [isOpen, setIsOpen] = React.useState(false);
+  const onClose = () => setIsOpen(false);
+  const onOpen = () => setIsOpen(true);
+  const navigate = useNavigate();
+  // Pomodoro state/context
+  const { setIsActive, setActiveTag, setTime, workTime, shortBreakTime, setInitTime } = useContext(StateContext);
 
-  const [isOpen, setIsOpen] = useState(false);
+  // Listen for dashboard action
+  useEffect(() => {
+    const action = localStorage.getItem('pomodoro_action');
+    if (!action) return;
+    if (action === 'start') {
+      setActiveTag(0); // Work
+      setTime(workTime);
+      setInitTime(workTime);
+      setIsActive(true);
+    } else if (action === 'break') {
+      setActiveTag(1); // Short Break
+      setTime(shortBreakTime);
+      setInitTime(shortBreakTime);
+      setIsActive(true);
+    } else if (action === 'end') {
+      setIsActive(false);
+    }
+    localStorage.removeItem('pomodoro_action');
+  }, [setIsActive, setActiveTag, setTime, workTime, shortBreakTime, setInitTime]);
 
-  const onClose = () => {
-    setIsOpen(false);
-  }
-
-  const onOpen = () => {
-    setIsOpen(true);
-  }
-
- 
-  const [completedCycles, setCompletedCycles] = useState(0);
-  
-
-  const handleCycleComplete = () => {
-    setCompletedCycles((prev) => prev + 1);
-  };
-
-
+  const [completedCycles, setCompletedCycles] = React.useState(0);
+  const handleCycleComplete = () => setCompletedCycles((prev) => prev + 1);
 
   return (
     <>
