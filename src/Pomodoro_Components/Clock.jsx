@@ -1,12 +1,13 @@
 import styled from 'styled-components';
-import {  useEffect } from 'react';
+import { useEffect } from 'react';
 import React, { useContext } from 'react';
 import { StateContext } from '../Pomodoro_Components/StateProvider.jsx';
 
 const Clock = () => {
     const { time, setTime } = useContext(StateContext);
-    const { isActive, setIsActive, initTime, setCompletedSessions, setCycle } = useContext(StateContext);
+    const { isActive, setIsActive, initTime, setCompletedSessions } = useContext(StateContext);
     
+    // ✅ SINGLE useEffect for timer logic
     useEffect(() => {
         let interval;
 
@@ -17,61 +18,63 @@ const Clock = () => {
         } else if (time === 0 && isActive) {
             setIsActive(false);
 
-            // ✅ Correctly update session and cycle
-            setCompletedSessions((prev) => {
-                const updated = prev + 1;
-                if ((updated) % 4 === 0) {
-                    setCycle((prevCycle) => prevCycle + 1);
-                }
-                return updated;
-            });
+            // ✅ Only increment sessions - let StateProvider handle cycle logic
+            setCompletedSessions((prev) => prev + 1);
 
             // === Dashboard Integration ===
             const now = new Date();
             const dateKey = now.toISOString().slice(0, 10); // YYYY-MM-DD
+            
             // Session count for today
             const sessionKey = `sessions_${dateKey}`;
             const studyKey = `studytime_${dateKey}`;
             const totalSessionsKey = 'total_sessions';
             const streakKey = 'current_streak';
             const bestStreakKey = 'best_streak';
+            
             // Increment today's session count
             let todaySessions = parseInt(localStorage.getItem(sessionKey) || '0', 10) + 1;
             localStorage.setItem(sessionKey, todaySessions);
+            
             // Add session minutes to today's study time
             let sessionMinutes = Math.round(initTime / 60);
             let todayMinutes = parseInt(localStorage.getItem(studyKey) || '0', 10) + sessionMinutes;
             localStorage.setItem(studyKey, todayMinutes);
+            
             // Increment total sessions
             let totalSessions = parseInt(localStorage.getItem(totalSessionsKey) || '0', 10) + 1;
             localStorage.setItem(totalSessionsKey, totalSessions);
+            
             // Update streaks
-            let streak = parseInt(localStorage.getItem(streakKey) || '0', 10);
+            let currentStreak = parseInt(localStorage.getItem(streakKey) || '0', 10);
             let bestStreak = parseInt(localStorage.getItem(bestStreakKey) || '0', 10);
+            
             // Check if yesterday had a session
             const yesterday = new Date(now.getTime() - 86400000);
-            const yKey = `sessions_${yesterday.toISOString().slice(0, 10)}`;
-            if (localStorage.getItem(yKey)) {
-                streak = streak + 1;
-            } else {
-                streak = 1;
+            const yesterdayKey = `sessions_${yesterday.toISOString().slice(0, 10)}`;
+            const yesterdayHadSession = localStorage.getItem(yesterdayKey);
+            
+            // Update streak logic
+            if (todaySessions === 1) { // Only update streak on first session of the day
+                if (yesterdayHadSession && parseInt(yesterdayHadSession) > 0) {
+                    currentStreak = currentStreak + 1;
+                } else {
+                    currentStreak = 1; // Reset streak if no session yesterday
+                }
+                
+                if (currentStreak > bestStreak) {
+                    bestStreak = currentStreak;
+                }
+                
+                localStorage.setItem(streakKey, currentStreak);
+                localStorage.setItem(bestStreakKey, bestStreak);
             }
-            if (streak > bestStreak) bestStreak = streak;
-            localStorage.setItem(streakKey, streak);
-            localStorage.setItem(bestStreakKey, bestStreak);
         }
 
         return () => clearInterval(interval);
-    }, [isActive, time]);
+    }, [isActive, time, setTime, setIsActive, setCompletedSessions, initTime]);
 
-    useEffect(() => {
-        if (isActive && time > 0) {
-            const interval = setInterval(() => {
-                setTime((time) => time - 1);
-            }, 1000);
-            return () => clearInterval(interval);
-        }
-    }, [time, isActive]);
+    // ❌ REMOVED: Duplicate useEffect that was causing double decrement
 
     const toggleClock = () => {
         setIsActive(!isActive);
