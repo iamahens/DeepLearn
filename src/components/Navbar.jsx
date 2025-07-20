@@ -382,12 +382,12 @@ const NavBar = () => {
         <div className="logo">
           <div className="logo-icon">
             <div className="pixel-cube">
-              <div className="cube-face cube-front">3D</div>
+              <div className="cube-face cube-front">D</div>
               <div className="cube-face cube-top"></div>
               <div className="cube-face cube-right"></div>
             </div>
           </div>
-          <span className="logo-text">DeepTerm</span>
+          <span className="logo-text">DeepLearn</span>
         </div>
 
         {/* Desktop Navigation */}
