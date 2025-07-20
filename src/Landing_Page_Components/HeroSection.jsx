@@ -175,32 +175,32 @@ const HeroSection = () => {
           organized notes, track progress, and maintain focus with our Pomodoro timer — all completely free.
         </p>
 
-        <div style={styles.buttonContainer}>
-          <button
-            style={{ ...styles.button, ...styles.buttonPrimary }}
-            onMouseEnter={handleButtonHover}
-            onMouseLeave={handleButtonLeave}
-            onClick={() => handleButtonClick("Dashboard")}
-          >
-            Dashboard →
-          </button>
-          <button
-            style={{ ...styles.button, ...styles.buttonSecondary }}
-            onMouseEnter={handleButtonHover}
-            onMouseLeave={handleButtonLeave}
-            onClick={() => handleButtonClick("Study Center")}
-          >
-            Study Center →
-          </button>
-          <button
-            style={{ ...styles.button, ...styles.buttonTertiary }}
-            onMouseEnter={handleButtonHover}
-            onMouseLeave={handleButtonLeave}
-            onClick={() => handleButtonClick("Try Now")}
-          >
-            Try Now →
-          </button>
-        </div>
+   <div style={styles.buttonContainer}>
+  <a 
+    href="/dashboard"
+    style={{ ...styles.button, ...styles.buttonPrimary, textDecoration: 'none', display: 'inline-block' }}
+    onMouseEnter={handleButtonHover}
+    onMouseLeave={handleButtonLeave}
+  >
+    Dashboard →
+  </a>
+  <a 
+    href="/study-center"
+    style={{ ...styles.button, ...styles.buttonSecondary, textDecoration: 'none', display: 'inline-block' }}
+    onMouseEnter={handleButtonHover}
+    onMouseLeave={handleButtonLeave}
+  >
+    Study Center →
+  </a>
+  <a 
+    href="/"
+    style={{ ...styles.button, ...styles.buttonTertiary, textDecoration: 'none', display: 'inline-block' }}
+    onMouseEnter={handleButtonHover}
+    onMouseLeave={handleButtonLeave}
+  >
+    Try Now →
+  </a>
+</div>
       </div>
 
       <style jsx>{`
