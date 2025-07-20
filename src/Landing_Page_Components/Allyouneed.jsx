@@ -99,7 +99,7 @@ const Allyouneed = () => {
               marginTop:'30px',
             }}
           >
-            Why Choose DeepTerm?
+            Why Choose DeepLearn?
           </h1>
           <div 
             className="w-16 sm:w-20 lg:w-24 h-2 mx-auto"
