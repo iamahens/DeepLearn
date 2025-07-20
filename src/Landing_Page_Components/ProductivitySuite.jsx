@@ -27,7 +27,8 @@ const ProductivitySuite = () => {
         'Monitor your progress with visual charts'
       ],
       buttonText: 'Open Dashboard',
-      buttonIcon: '🔗'
+      buttonIcon: '🔗',
+      link: 'https://deep-learn-nine.vercel.app/dashboard' // Replace with your actual URL
     },
     {
       id: 2,
@@ -42,7 +43,8 @@ const ProductivitySuite = () => {
         'Save and revisit your learning resources'
       ],
       buttonText: 'Study Now',
-      buttonIcon: '🚀'
+      buttonIcon: '🚀',
+      link: 'https://deep-learn-nine.vercel.app/study-center' // Replace with your actual URL
     },
     {
       id: 3,
@@ -57,7 +59,8 @@ const ProductivitySuite = () => {
         'Visual progress indicators and history'
       ],
       buttonText: 'Start Timer',
-      buttonIcon: '▶️'
+      buttonIcon: '▶️',
+      link: 'https://deep-learn-nine.vercel.app/pomodora' // Replace with your actual URL
     },
     {
       id: 4,
@@ -72,9 +75,14 @@ const ProductivitySuite = () => {
         'Export to PDF, DOCX, or CSV formats'
       ],
       buttonText: 'Extract Notes',
-      buttonIcon: '📋'
+      buttonIcon: '📋',
+      link: 'https://deep-learn-nine.vercel.app/reviewer' // Replace with your actual URL
     }
   ];
+
+  const handleButtonClick = (link) => {
+    window.location.href = link;
+  };
 
   return (
     <div style={{
@@ -244,25 +252,28 @@ const ProductivitySuite = () => {
                 </div>
 
                 {/* Action Button */}
-                <button style={{
-                  width: '100%',
-                  background: product.bgColor,
-                  border: 'clamp(2px, 0.4vw, 4px) solid #2c2c2c',
-                  color: '#2c2c2c',
-                  padding: 'clamp(8px, 2vw, 15px) clamp(10px, 2.5vw, 20px)',
-                  fontSize: 'clamp(8px, 1.8vw, 14px)',
-                  fontWeight: 'bold',
-                  cursor: 'pointer',
-                  transition: 'all 0.2s ease',
-                  textShadow: '1px 1px 0px rgba(255,255,255,0.5)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  gap: 'clamp(5px, 1vw, 10px)',
-                  transform: hoveredCard === product.id ? 'scale(1.05)' : 'scale(1)',
-                  boxShadow: hoveredCard === product.id ? `0 0 20px ${product.bgColor}50` : 'none',
-                  minHeight: 'clamp(32px, 5vw, 48px)'
-                }}>
+                <button 
+                  onClick={() => handleButtonClick(product.link)}
+                  style={{
+                    width: '100%',
+                    background: product.bgColor,
+                    border: 'clamp(2px, 0.4vw, 4px) solid #2c2c2c',
+                    color: '#2c2c2c',
+                    padding: 'clamp(8px, 2vw, 15px) clamp(10px, 2.5vw, 20px)',
+                    fontSize: 'clamp(8px, 1.8vw, 14px)',
+                    fontWeight: 'bold',
+                    cursor: 'pointer',
+                    transition: 'all 0.2s ease',
+                    textShadow: '1px 1px 0px rgba(255,255,255,0.5)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: 'clamp(5px, 1vw, 10px)',
+                    transform: hoveredCard === product.id ? 'scale(1.05)' : 'scale(1)',
+                    boxShadow: hoveredCard === product.id ? `0 0 20px ${product.bgColor}50` : 'none',
+                    minHeight: 'clamp(32px, 5vw, 48px)'
+                  }}
+                >
                   <span>{product.buttonIcon}</span>
                   <span>{product.buttonText}</span>
                 </button>
