@@ -168,7 +168,7 @@ const HeroSection = () => {
         <div style={styles.badge}>⚡ 100% FREE • No Paywalls • No Account Required</div>
         <h1 style={styles.title}>
           Boost your <span style={styles.titleHighlight}>productivity</span> with<br />
-          DeepTerm
+          DeepLearn
         </h1>
         <p style={styles.description}>
           Our AI-powered tools help you learn efficiently, create custom quizzes, extract
