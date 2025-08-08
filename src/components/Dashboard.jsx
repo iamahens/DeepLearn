@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
+import Footer from "./Footer";
 
 // Modal component for name input
 const NameModal = ({ open, onSubmit }) => {
@@ -1083,6 +1084,7 @@ const Calendar = () => {
           {calendarRows}
         </tbody>
       </table>
+      <Footer/>
     </div>
   );
 };

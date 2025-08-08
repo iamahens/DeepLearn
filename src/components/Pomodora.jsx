@@ -10,6 +10,7 @@ import PomodoroTimer from '../Pomodoro_Components/PomodoroTimer.jsx';
 import StreakDisplay from '../Pomodoro_Components/StreakDisplay.jsx';
 import ProgressTracker from '../Pomodoro_Components/ProgressTracker.jsx';
 import AboutPomodoro from '../Pomodoro_Components/AboutPomodoro.jsx';
+import Footer from './Footer.jsx';
 const Pomodora = () => {
   const [isOpen, setIsOpen] = React.useState(false);
   const onClose = () => setIsOpen(false);
@@ -66,6 +67,7 @@ const Pomodora = () => {
       </CogIcon>
 
       <AboutPomodoro />
+      <Footer/>
     </>
   )
 }

@@ -10,6 +10,7 @@ import Reviewer from './components/Reviewer.jsx';
 import Pomodora from './components/Pomodora.jsx';
 import StudyCenter from './components/StudyCenter.jsx';
 import Dashboard from './components/Dashboard.jsx';
+import About from './components/About.jsx'
 function App() {
   
 
@@ -22,6 +23,7 @@ function App() {
         <Routes>
   
           <Route path="/" element={<Home />} />
+           <Route path="/about" element={<About />} />
           <Route path="/reviewer" element={<Reviewer />} />
           <Route path="/pomodora" element={<Pomodora />} />
           <Route path="/study-center" element={<StudyCenter />} />

@@ -396,6 +396,10 @@ const NavBar = () => {
             <span className="btn-icon">🏠</span>
             Home
           </Link>
+          <Link to="/about" className="nav-btn dashboard-btn">
+            <span className="btn-icon">📊</span>
+            About
+          </Link>
           <Link to="/reviewer" className="nav-btn reviewer-btn">
             <span className="btn-icon">📋</span>
             Reviewer
@@ -429,6 +433,10 @@ const NavBar = () => {
           <Link to="/" className="mobile-nav-btn home-btn" onClick={() => setIsMenuOpen(false)}>
             <span className="btn-icon">🏠</span>
             Home
+          </Link>
+          <Link to="/about" className="nav-btn dashboard-btn">
+            <span className="btn-icon">📊</span>
+            About
           </Link>
           <Link to="/reviewer" className="mobile-nav-btn reviewer-btn" onClick={() => setIsMenuOpen(false)}>
             <span className="btn-icon">📋</span>
